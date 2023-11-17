@@ -22,6 +22,7 @@ public class Event {
     private LocalDate data;
     private String luogo;
     private int postiDisponibili;
+    private String avatar;
 
     @JsonIgnore
     @ManyToMany

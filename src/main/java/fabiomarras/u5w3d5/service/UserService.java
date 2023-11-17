@@ -44,4 +44,9 @@ public class UserService {
         user.setEvents(body.events());
         return userRepository.save(user);
     }
+    public void findByIdAndDelete(int id){
+        User user = this.findById(id);{
+            userRepository.delete(user);
+        }
+    }
 }

@@ -18,8 +18,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/events")
@@ -53,13 +55,27 @@ public class EventController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ORGANIZZATORE_DI_EVENTI')")
+    @ResponseStatus(HttpStatus.OK)
     public Event findByIdAndUpdate(@PathVariable int id, @RequestBody Event body){
         return eventService.findByIdAndUpdate(id, body);
     }
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('ORGANIZZATORE_DI_EVENTI')")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void findByIdAndDelete(@PathVariable int id){
         eventService.findByIdAndDelete(id);
     }
 
+    @PostMapping("/upload")
+    @PreAuthorize("hasAuthority('ORGANIZZATORE_DI_EVENTI')")
+    public String uploadFile(@RequestParam("avatar") MultipartFile body) throws IOException {
+        System.out.println(body.getSize());
+        System.out.println(body.getContentType());
+        return eventService.uploadPicture(body);
+    }
+
+    @GetMapping("/myEvents") //ENDPOINT ESCLUSIVO CHE RITORNA LA LISTA DEGLI EVENTI DEL PROFILO
+    public List<Event> getMyEvents(@AuthenticationPrincipal User currentUser) {
+        return currentUser.getEvents();
+    }
 }

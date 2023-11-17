@@ -22,6 +22,7 @@ public record NewEventDTO(
         String luogo,
         @NotNull(message = "Inserisci obbligatoriamente i posti disponibili")
         int postiDisponibili,
+        String avatar,
         List<User> user
 ){
 }
