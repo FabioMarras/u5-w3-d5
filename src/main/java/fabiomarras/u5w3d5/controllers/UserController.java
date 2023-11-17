@@ -1,6 +1,5 @@
 package fabiomarras.u5w3d5.controllers;
 
-import fabiomarras.u5w3d5.entities.Event;
 import fabiomarras.u5w3d5.entities.User;
 import fabiomarras.u5w3d5.exceptions.BadRequestException;
 import fabiomarras.u5w3d5.payloads.NewUserDTO;
@@ -9,7 +8,6 @@ import fabiomarras.u5w3d5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -68,6 +66,7 @@ public class UserController {
     }
 
     @GetMapping("/me")
+    @ResponseStatus(HttpStatus.OK)
     public UserDetails getMyProfile(@AuthenticationPrincipal User currentUser){
         return currentUser;
     }
@@ -80,7 +79,7 @@ public class UserController {
 
     @DeleteMapping("/me")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void getProfile(@AuthenticationPrincipal User currentUser){
-        userService.findByIdAndDelete(currentUser.getId());
-    };
+    public void deleteProfile(@AuthenticationPrincipal User currentUser) {
+            userService.findByIdAndDelete(currentUser.getId());
+    }
 }

@@ -4,17 +4,13 @@ import fabiomarras.u5w3d5.entities.Event;
 import fabiomarras.u5w3d5.entities.User;
 import fabiomarras.u5w3d5.exceptions.BadRequestException;
 import fabiomarras.u5w3d5.payloads.NewEventDTO;
-import fabiomarras.u5w3d5.payloads.NewUserDTO;
 import fabiomarras.u5w3d5.repositores.UserRepository;
 import fabiomarras.u5w3d5.service.EventService;
-import fabiomarras.u5w3d5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -29,15 +25,14 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
-    @Autowired
-    private UserRepository userRepository;
-
     @GetMapping("")
+    @ResponseStatus(HttpStatus.OK)
     public Page<Event> getEvent(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String orderBy){
         return eventService.getAllEvent(page, size, orderBy);
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public Event findById(@PathVariable int id){
         return eventService.findById(id);
     }
@@ -75,6 +70,7 @@ public class EventController {
     }
 
     @GetMapping("/myEvents") //ENDPOINT ESCLUSIVO CHE RITORNA LA LISTA DEGLI EVENTI DEL PROFILO
+    @ResponseStatus(HttpStatus.OK)
     public List<Event> getMyEvents(@AuthenticationPrincipal User currentUser) {
         return currentUser.getEvents();
     }

@@ -16,7 +16,7 @@ public record NewEventDTO(
         @Size(min = 5, message = "Scrivi una descrizione con più di 5 caratteri")
         String descrizione,
         @NotNull(message = "Inserisci obbligatoriamente la data")
-        @JsonFormat(pattern = "yyyy/MM/dd")
+        @JsonFormat(pattern = "yyyy-MM-dd")
         LocalDate data,
         @NotNull(message = "Inserisci obbligatoriamente il luogo dell'evento")
         String luogo,

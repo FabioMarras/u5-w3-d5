@@ -18,7 +18,7 @@ public class Event {
     private int id;
     private String titolo;
     private String descrizione;
-    @JsonFormat(pattern = "yyyy/MM/dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate data;
     private String luogo;
     private int postiDisponibili;
