@@ -1,6 +1,7 @@
 package fabiomarras.u5w3d5.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,8 +23,9 @@ public class Event {
     private String luogo;
     private int postiDisponibili;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "user_event", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id"))
-    private List<User> user;
+    private List<User> users;
 }

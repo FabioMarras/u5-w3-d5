@@ -10,10 +10,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class EventService {
@@ -49,7 +52,7 @@ public class EventService {
         newEvent.setPostiDisponibili(body.getPostiDisponibili());
 
         Event event = eventRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
-        newEvent.setUser(event.getUser());
+        newEvent.setUsers(event.getUsers());
 
         return eventRepository.save(newEvent);
     }
@@ -58,4 +61,5 @@ public class EventService {
         Event newEvent = this.findById(id);
         eventRepository.delete(newEvent);
     }
+
 }
