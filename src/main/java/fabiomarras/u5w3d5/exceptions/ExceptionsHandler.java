@@ -15,6 +15,12 @@ import java.util.List;
 @RestControllerAdvice
 public class ExceptionsHandler {
 
+    @ExceptionHandler(NoPostiException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)  // Genera errore 404
+    public ErrorsPayload handleNotFound(NoPostiException e) {
+        return new ErrorsPayload(e.getMessage(), new Date());
+    }
+
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)  // Genera errore 404
     public ErrorsPayload handleNotFound(NotFoundException e) {
