@@ -31,7 +31,7 @@ public class User implements UserDetails {
     @ManyToMany
     @JoinTable(name = "user_event", joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<Events> events;
+    private List<Event> events;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

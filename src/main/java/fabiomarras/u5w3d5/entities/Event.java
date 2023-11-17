@@ -1,5 +1,6 @@
 package fabiomarras.u5w3d5.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,15 +11,16 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Events {
+public class Event {
     @Id
     @GeneratedValue
     private int id;
     private String titolo;
     private String descrizione;
+    @JsonFormat(pattern = "yyyy/MM/dd")
     private LocalDate data;
     private String luogo;
-    private int posti_disponibili;
+    private int postiDisponibili;
 
     @ManyToMany
     @JoinTable(name = "user_event", joinColumns = @JoinColumn(name = "user_id"),

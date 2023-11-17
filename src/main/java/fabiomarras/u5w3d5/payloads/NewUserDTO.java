@@ -1,7 +1,7 @@
 package fabiomarras.u5w3d5.payloads;
 
 import fabiomarras.u5w3d5.Enums.Role;
-import fabiomarras.u5w3d5.entities.Events;
+import fabiomarras.u5w3d5.entities.Event;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -25,7 +25,7 @@ public record NewUserDTO(
         String avatar,
         String password,
         Role role,
-        List<Events> events,
+        List<Event> events,
 
         List<String> errorsList
 

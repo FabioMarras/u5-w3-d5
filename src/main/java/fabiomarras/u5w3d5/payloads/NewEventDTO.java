@@ -1,5 +1,6 @@
 package fabiomarras.u5w3d5.payloads;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import fabiomarras.u5w3d5.entities.User;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -15,12 +16,12 @@ public record NewEventDTO(
         @Size(min = 5, message = "Scrivi una descrizione con più di 5 caratteri")
         String descrizione,
         @NotNull(message = "Inserisci obbligatoriamente la data")
+        @JsonFormat(pattern = "yyyy/MM/dd")
         LocalDate data,
         @NotNull(message = "Inserisci obbligatoriamente il luogo dell'evento")
         String luogo,
         @NotNull(message = "Inserisci obbligatoriamente i posti disponibili")
-        @Size(min = 1, message = "Scrivi un valore maggiore di 0 caratteri")
-        int posti_dispositivi,
+        int postiDisponibili,
         List<User> user
 ){
 }
