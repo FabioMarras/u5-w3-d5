@@ -25,7 +25,10 @@ public record NewUserDTO(
         String avatar,
         String password,
         Role role,
-        List<Events> events
+        List<Events> events,
+
+        List<String> errorsList
+
 ) {
 
 }
