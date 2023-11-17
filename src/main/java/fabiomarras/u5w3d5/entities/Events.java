@@ -1,12 +1,11 @@
 package fabiomarras.u5w3d5.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,5 +18,10 @@ public class Events {
     private String descrizione;
     private LocalDate data;
     private String luogo;
-    private int numeri_disponibili;
+    private int posti_disponibili;
+
+    @ManyToMany
+    @JoinTable(name = "user_event", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id"))
+    private List<User> user;
 }
